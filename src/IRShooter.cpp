@@ -6,6 +6,7 @@
  */
 
 #include <IRShooter.h>
+#include <Timer.h>
 
 IRShooter::IRShooter(uint32_t shootingWheel1Channel, uint32_t shootingWheel2Channel, uint32_t intakeChannel) :
 	shootingWheel1(shootingWheel1Channel),

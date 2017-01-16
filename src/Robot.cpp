@@ -1,7 +1,16 @@
-#include "WPILib.h"
-#include "../IRLibrary/IRLib.h"
-#include "IRShooter.h"
+#include <iostream>
+#include <memory>
+#include <string>
 
+#include <IRShooter.h>
+
+#include <HumanInterfaceDevices/IRJoystick.h>
+#include <RobotDrive/IRRobotDrive.h>
+
+#include <SampleRobot.h>
+#include <SmartDashboard/SendableChooser.h>
+#include <SmartDashboard/SmartDashboard.h>
+#include <Timer.h>
 
 /**
  * This is a demo program showing the use of the RobotDrive class.
@@ -13,38 +22,33 @@
  * don't. Unless you know what you are doing, complex code will be much more difficult under
  * this system. Use IterativeRobot or Command-Based instead if you're new.
  */
-class Robot: public SampleRobot
+class Robot: public frc::SampleRobot
 {
-	IRRobotDrive myDrive;
-	IRJoystick joystick,gamePad;
-	IRShooter irshooter;
+	IR::IRRobotDrive 	myDrive {0, 1, 2, 3};
+	IR::IRJoystick 		joystick {0},
+						gamePad {1};
+	IRShooter 			irshooter {4, 5, 6};
 
-	SendableChooser *chooser;
+	frc::SendableChooser<std::string> chooser;
 	const std::string autoTestShoot = "Test Shooter";
 	const std::string autoTestDrive = "Test Driver";
 
 public:
-	Robot() :
-		myDrive(0, 1, 2, 3),
-		joystick(0),
-		gamePad(1),
-		irshooter(4,5,6)
+	Robot()
 	{
 		myDrive.SetMotorsInverted(true);
 	}
 
 	void RobotInit()
 	{
-		chooser = new SendableChooser();
-		chooser->AddDefault(autoTestShoot, (void*)&autoTestShoot);
-		chooser->AddObject(autoTestDrive, (void*)&autoTestDrive);
-		SmartDashboard::PutData("Auto Modes", chooser);
+		chooser.AddDefault(autoTestShoot, autoTestShoot);
+		chooser.AddObject(autoTestDrive, autoTestDrive);
+		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 	}
 
 	void Autonomous()
 	{
-
-		std::string autoSelected = *((std::string*)chooser->GetSelected());
+		auto autoSelected = chooser.GetSelected();
 		std::cout << "Auto selected: " << autoSelected << std::endl;
 
 		if(autoSelected == autoTestDrive){

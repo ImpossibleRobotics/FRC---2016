@@ -5,10 +5,10 @@
  *      Author: Dylan Vos
  */
 
-#ifndef SRC_IRSHOOTER_H_
-#define SRC_IRSHOOTER_H_
+#pragma once
 
-#include "WPILIB.h"
+#include <Spark.h>
+#include <Victor.h>
 
 class IRShooter {
 public:
@@ -23,9 +23,7 @@ public:
 	void StopInTake();
 
 protected:
-	Spark shootingWheel1, shootingWheel2;
-	Victor intake;
+	frc::Spark shootingWheel1, shootingWheel2;
+	frc::Victor intake;
 
 };
-
-#endif /* SRC_IRSHOOTER_H_ */
