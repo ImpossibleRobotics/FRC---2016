@@ -56,13 +56,13 @@ public:
 			std::cout << "Running " + autoTestDrive << std::endl;
 
 			myDrive.Drive(0.1, 0.0);
-			Wait(10);
+			frc::Wait(10);
 			myDrive.Drive(0.0, 0.0);
-			Wait(10);
+			frc::Wait(10);
 			myDrive.Drive(0.2, 1);
-			Wait(10);
+			frc::Wait(10);
 			myDrive.Drive(0.2, -1);
-			Wait(10);
+			frc::Wait(10);
 			myDrive.Drive(0.0, 0.0);
 		}
 		else {
@@ -70,11 +70,11 @@ public:
 			//place in front of low bar, drive forward, turn right, shoot
 			std::cout << "Running " + autoTestShoot << std::endl;
 			irshooter.TakeIn();
-			Wait(10);
+			frc::Wait(10);
 			myDrive.Drive(0.2, 0.0);
-			Wait(10);
+			frc::Wait(10);
 			myDrive.Drive(0.2, 0.2);
-			Wait(10);
+			frc::Wait(10);
 			irshooter.Shoot();
 		}
 	}
@@ -102,7 +102,7 @@ public:
 
 			if(gamePad.GetRawButton(1)) irshooter.ShootingSequence();
 
-			Wait(0.005);				// wait for a motor update time
+			frc::Wait(0.005);				// wait for a motor update time
 		}
 	}
 
@@ -112,7 +112,7 @@ public:
 	void Test()
 	{
 		irshooter.TakeIn();
-		Wait(10);
+		frc::Wait(10);
 		irshooter.Shoot();
 	}
 };
